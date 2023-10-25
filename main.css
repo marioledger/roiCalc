@@ -1,0 +1,234 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Space Mono', monospace !important;
+    background-color: #232426;
+    color: white !important;
+}
+input {
+    border: 0.5px solid #797979;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 7px;
+    color: white !important;
+    width: 30%;
+}
+#container {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px solid #797979;
+    border-radius: 30px;
+    font-family: "Space Mono" !important;
+}
+#panel {
+    width: 90%;
+    height: 90%;
+}
+#inside-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 90%;
+    align-items: flex-end;
+}
+.column {
+    flex-basis: calc(33.33% - 10px);
+    height: 90%;
+    align-self: bottom;
+    border-radius: 20px;
+}
+.row {
+    display: flex;
+    width: 100%;
+    border: 0.5px solid #797979;
+    border-radius: 20px;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 15px;
+}
+.row-2 {
+    background-color: #552D2D;
+}
+.row-item {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-family: "Space Mono" !important;
+}
+.column-1 {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.weekly-profit-before-roofing-accelerator-headline {
+    font-size: 22px !important;
+    margin: 0 !important;
+}
+.weekly-profit-before-roofing-accelerator-amount {
+    font-size: 30px;
+}
+.weekly-jobs-current-metrics {
+    margin-bottom: 14px !important;
+}
+.lead-cost {
+    margin: 0 !important;
+}
+#leadCostAmount {
+    width: 154px !important;
+}
+#bookedAppointmentRate {
+    margin-left: 10px !important;
+}
+.booked-appointment-inputs {
+    display: flex;
+    flex-direction: row;
+}
+.show-up-inputs {
+    display: flex;
+    flex-direction: row;
+}
+.row-3 {
+    height: 210.5px !important;
+}
+.close-rate {
+    display: flex;
+    flex-direction: column;
+    margin: 0 !important;
+}
+#closeRateSlider {
+    width: 100%;
+}
+#closeRateSlider > input {
+    width: 100%;
+}
+.close-rate-line {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.close-rate-line-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.close-rate-slider {
+    width: 100%;
+}
+#closeRateDisplay {
+    font-size: 30px;
+}
+.row-4 {
+    margin-top: 10px;
+}
+.roi-calculator {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+.avg-ticket-price {
+    margin: 0;
+}
+.row-5 {
+    margin-top: 10px;
+}
+.column-2 {
+    display: flex;
+    flex-direction: column;
+}
+.row-6 {
+    background-color: #2D554F;
+    margin-top: 10px;
+}
+.monthly-ad-budget-headline {
+    margin: 0;
+    font-size: 25px;
+}
+.monthly-ad-budget {
+    margin: 0;
+    font-size: 30px;
+}
+.monthly-ad-budget-amount {
+    width: 100%;
+}
+.roiText {
+    font-size: 30px;
+}
+.roi-number {
+    font-size: 48px;
+    font-weight: bold;
+}
+.roi-number-positive {
+    color: #00ff96;
+    text-shadow: 1px 1px 0 #07603b, 2px 2px 0 #1c7952, 3px 3px 0 #073622, 4px 4px 0 #106211, 5px 5px 0 #0b410a;
+}
+.roi-number-negative {
+    color: #ff4c4c;
+    text-shadow: 1px 1px 0 #590909, 2px 2px 0 #831010, 3px 3px 0 #480303, 4px 4px 0 #b51717, 5px 5px 0 #140303;
+}
+.roi-number-neutral {
+    color: #fff;
+    text-shadow: 1px 1px 0 #808181, 2px 2px 0 #bcbcbc, 3px 3px 0 #a4a4a4, 4px 4px 0 #6e6e6e, 5px 5px 0 #808080;
+}
+.roi-container {
+    align-self: flex-end;
+    margin-bottom: 10px;
+}
+.daily-jobs {
+    margin: 0;
+}
+.row-8{
+    margin-top: 10px;
+}
+.row-9 {
+    margin-top: 10px;
+}
+.daily-profit {
+    margin: 0;
+}
+.currency-wrap{
+    position:relative;
+}
+.currency-code{
+    position:absolute;
+    left:8px;
+    top:11px;
+}
+.percentage-code{
+    position:absolute;
+    left:65px;
+    top:11px;
+}
+.text-percentage{
+    padding:10px;
+    padding-right: 20px;
+    text-align: right;
+    border:solid 1px #ccc;
+    border-radius:5px;
+}
+.text-currency{
+    padding: 10px 5px 10px 20px;
+    border:solid 1px #ccc;
+    border-radius:5px;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <script defer src="./main.js"></script>
+
+</head>
+<body>
+    <button id="download" onclick="exportPDF()">Download PDF</button>
+    <div id="hidden-latex" style="visibility: hidden;"></div>
+    <div id="formula">
+
+      </div>
+    <div id="container">
+        <div id="panel">
+           <h3>ROI Calculator</h3>
+           <div id="inside-panel">
+              <div class="column column-1">
+                 <div class="row row-1">
+                    <h1>Current Metrics</h1>
+                    <div class="row-item weekly-inquiries">
+                       <label>Monthly Inquiries:</label>
+                       <input id="monthlyInquiriesAmount" type="text" placeholder="" value="0">
+                    </div>
+                    <div class="row-item weekly-jobs-current-metrics">
+                       <label>Monthly Jobs:</label>
+                       <input id="monthlyJobsCurrentMetricsAmount" type="text" placeholder="" value="0">
+                    </div>
+                 </div>
+                 <div style="margin-top: 9px;">
+                    <div class="row row-2">
+                       <span class="row-item weekly-profit-before-roofing-accelerator-headline">MONTHLY PROFIT BEFORE ROOFING ACCELERATOR</span>
+                       <div class="row-item weekly-profit-before-roofing-accelerator">
+                          <span class="weekly-profit-before-roofing-accelerator-amount">$0</span>
+                       </div>
+                    </div>
+                    <div class="row row-6">
+                       <span class="row-item weekly-profit-before-roofing-accelerator-headline">MONTHLY PROFIT AFTER ROOFING ACCELERATOR</span>
+                       <div class="row-item weekly-profit-before-roofing-accelerator">
+                          <span class="weekly-profit-after-roofing-accelerator-amount">$34,622.11</span>
+                       </div>
+                    </div>
+                    <div class="row row-5">
+                       <div class="row-item roi-calculator">
+                          <div class="row-item avg-ticket-price">
+                             <div class="roi-container">
+                                <span class="roiText">ROI</span>
+                             </div>
+                             <span class="roi-number roi-number-neutral">0.00%</span>
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="column column-2">
+                 <div class="row row-3">
+                    <div class="row-item lead-cost">
+                       <label>Lead Cost:</label>
+                       <div class="currency-wrap">
+                          <span class="currency-code">$</span>
+                          <input id="leadCostAmount" type="number" class="text-currency" value="0">
+                       </div>
+                    </div>
+                    <div class="row-item booked-appointment">
+                       <label>Booked Appointment:</label>
+                       <div class="booked-appointment-inputs">
+                          <div class="currency-wrap">
+                             <span class="currency-code">$</span>
+                             <input style="width: 72px;" class="text-currency" id="bookedAppointmentCost" type="text" value="0">
+                          </div>
+                          <div class="currency-wrap">
+                             <span class="percentage-code">%</span>
+                             <input style="width: 72px;" class="text-percentage" id="bookedAppointmentRate" type="text" value="0">
+                          </div>
+                       </div>
+                    </div>
+                    <div class="row-item show-up">
+                       <label>Show Up:</label>
+                       <div class="show-up-inputs">
+                          <div class="currency-wrap">
+                             <span class="currency-code">$</span>
+                             <input style="width: 72px;" class="text-currency" id="showUpCost" type="text" value="0">
+                          </div>
+                          <div class="currency-wrap">
+                             <span class="percentage-code">%</span>
+                             <input style="width: 72px; margin-left: 10px;" class="text-percentage" id="showUpRate" type="text" value="0">
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row row-4">
+                    <div class="row-item close-rate">
+                       <div class="close-rate-line">
+                          <div class="close-rate-line-line">
+                             <p>CLOSE RATE</p>
+                          </div>
+                          <div class="close-rate-line-amount"> <span id="closeRateDisplay">0%</span> </div>
+                       </div>
+                       <div class="close-rate-slider">
+                          <input type="range" id="closeRateSlider" min="0" max="100" step="1" value="0">
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row row-5">
+                    <div class="row-item roi-calculator">
+                       <div class="row-item avg-ticket-price">
+                          <label>Avg. Ticket Price:</label>
+                          <div class="currency-wrap" style="width: 35%;">
+                             <span class="currency-code">$</span>
+                             <input style="width: 100%;" id="avgTicketPrice" type="number" class="text-currency" value="0">
+                          </div>
+                       </div>
+                       <div class="row-item avg-profit-margin">
+                          <label>Avg. Profit Margin</label>
+                          <div class="currency-wrap" style="width:35%;">
+                             <span class="percentage-code" style="left: 85px;">%</span>
+                             <input style="width: 100%;" id="avgProfitMargin" type="number" class="text-percentage" value="0">
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row row-5">
+                    <div class="row-item roi-calculator">
+                       
+                       <div class="row-item avg-profit-margin">
+                          <label>Service Charge</label>
+                          <div class="currency-wrap" style="width:35%;">
+                             <span class="percentage-code" style="left: 85px;">$</span>
+                             <input style="width: 100%;" id="serviceChargeAmount" type="number" class="text-percentage" value="0">
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="column">
+                 <div class="row row-7">
+                    <span class="row-item monthly-ad-budget-headline">MONTHLY AD BUDGET</span>
+                    <div class="row-item monthly-ad-budget">
+                       <div class="currency-wrap">
+                          <span class="currency-code">$</span>
+                          <input style="width: 100%; padding-left: 30px;" id="monthlyAdBudgetAmount" type="number" class="text-currency monthly-ad-budget-amount" value="0">
+                       </div>
+                    </div>
+                 </div>
+                 <div class="row row-8">
+                    <div class="row-item daily-jobs">
+                       <label>Daily Jobs:</label>
+                       <input id="dailyJobs" type="text" placeholder="Amount">
+                    </div>
+                    <div class="row-item weekly-jobs">
+                       <label>Weekly Jobs:</label>
+                       <input id="weeklyJobs" type="text" placeholder="Amount">
+                    </div>
+                    <div class="row-item monthly-jobs">
+                       <label>Monthly Jobs:</label>
+                       <input id="monthlyJobs" type="text" placeholder="Amount">
+                    </div>
+                    <div class="row-item yearly-jobs">
+                       <label>Yearly Jobs:</label>
+                       <input id="yearlyJobs" type="text" placeholder="Amount">
+                    </div>
+                 </div>
+                 <div class="row row-9">
+                    <span class="row-item monthly-ad-budget-headline"></span>
+                    <div class="row-item daily-profit">
+                       <label>Daily Profit:</label>
+                       <div class="currency-wrap" style="width:45%;">
+                          <span class="currency-code">$</span>
+                          <input class="text-currency" id="dailyProfit" type="text" style="width: 100%;" value="0">
+                       </div>
+                    </div>
+                    <div class="row-item weekly-profit">
+                       <label>Weekly Profit:</label>
+                       <div class="currency-wrap" style="width: 45%;">
+                          <span class="currency-code">$</span>
+                          <input class="text-currency" id="weeklyProfit" type="text" style="width: 100%;" value="0">
+                       </div>
+                    </div>
+                    <div class="row-item monthly-profit">
+                       <label>Monthly Profit:</label>
+                       <div class="currency-wrap" style="width: 45%;">
+                          <span class="currency-code">$</span>
+                          <input class="text-currency" id="monthlyProfit" type="text" style="width: 100%;" value="0">
+                       </div>
+                    </div>
+                    <div class="row-item yearly-profit">
+                       <label>Yearly Profit:</label>
+                       <div class="currency-wrap" style="width: 45%;">
+                          <span class="currency-code">$</span>
+                          <input class="text-currency" id="yearlyProfit" type="text" style="width: 100%;" value="0">
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+</body>
+</html>
