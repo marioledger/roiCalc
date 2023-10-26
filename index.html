@@ -19,14 +19,13 @@
 
 </head>
 <body>
-    <button id="download" onclick="exportPDF()">Download PDF</button>
+    
     <div id="hidden-latex" style="visibility: hidden;"></div>
     <div id="formula">
 
       </div>
     <div id="container">
         <div id="panel">
-           <h3>ROI Calculator</h3>
            <div id="inside-panel">
               <div class="column column-1">
                  <div class="row row-1">
@@ -48,9 +47,9 @@
                        </div>
                     </div>
                     <div class="row row-6">
-                       <span class="row-item weekly-profit-before-roofing-accelerator-headline">MONTHLY PROFIT AFTER ROOFING ACCELERATOR</span>
+                       <span class="row-item weekly-profit-before-roofing-accelerator-headline">ADDED MONTHLY PROFIT AFTER ROOFING ACCELERATOR</span>
                        <div class="row-item weekly-profit-before-roofing-accelerator">
-                          <span class="weekly-profit-after-roofing-accelerator-amount">$34,622.11</span>
+                          <span class="weekly-profit-after-roofing-accelerator-amount">$0</span>
                        </div>
                     </div>
                     <div class="row row-5">
@@ -158,19 +157,19 @@
                  <div class="row row-8">
                     <div class="row-item daily-jobs">
                        <label>Daily Jobs:</label>
-                       <input id="dailyJobs" type="text" placeholder="Amount">
+                       <input id="dailyJobs" type="text" placeholder="Amount" value="0">
                     </div>
                     <div class="row-item weekly-jobs">
                        <label>Weekly Jobs:</label>
-                       <input id="weeklyJobs" type="text" placeholder="Amount">
+                       <input id="weeklyJobs" type="text" placeholder="Amount" value="0">
                     </div>
                     <div class="row-item monthly-jobs">
                        <label>Monthly Jobs:</label>
-                       <input id="monthlyJobs" type="text" placeholder="Amount">
+                       <input id="monthlyJobs" type="text" placeholder="Amount" value="0">
                     </div>
                     <div class="row-item yearly-jobs">
                        <label>Yearly Jobs:</label>
-                       <input id="yearlyJobs" type="text" placeholder="Amount">
+                       <input id="yearlyJobs" type="text" placeholder="Amount" value="0">
                     </div>
                  </div>
                  <div class="row row-9">
@@ -208,5 +207,13 @@
            </div>
         </div>
      </div>
+
+     <div class="control-panel">
+        <button id="download" onclick="exportPDF()">Download PDF</button>
+        <button id="bestCaseButton">Best Case</button>
+        <button id="averageCaseButton">Average Case</button>
+        <button id="worstCaseButton">Worst Case</button>
+    </div>
+     
 </body>
 </html>

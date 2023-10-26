@@ -30,6 +30,41 @@ function exportPDF() {
     });
   }
   
+document.querySelector("#bestCaseButton").addEventListener("click", () => {
+    monthlyAdBudget.value = 1500;
+    leadCost.value = 30;
+    bookedAppointmentRate.value = 70;
+    bookedAppointmentCost.value = 42.86;
+    showUpRate.value = 85;
+    showUpCost.value = 50.42;
+    closeRate.value = 40;   
+    document.querySelector("#closeRateDisplay").textContent = "40%";
+
+})
+
+document.querySelector("#averageCaseButton").addEventListener("click", () => {
+    monthlyAdBudget.value = 1500;
+    leadCost.value = 50;
+    bookedAppointmentRate.value = 60;
+    bookedAppointmentCost.value = 83.33;
+    showUpRate.value = 75;
+    showUpCost.value = 111.11;
+    closeRate.value = 30;
+    document.querySelector("#closeRateDisplay").textContent = "30%";
+    
+})
+
+document.querySelector("#worstCaseButton").addEventListener("click", () => {
+    monthlyAdBudget.value = 1500;
+    leadCost.value = 100;
+    bookedAppointmentRate.value = 40;
+    bookedAppointmentCost.value = 250;
+    showUpRate.value = 42.5;
+    showUpCost.value = 400;
+    closeRate.value = 20;
+    document.querySelector("#closeRateDisplay").textContent = "20%";
+    
+})
   
   
 
@@ -140,17 +175,22 @@ elements.forEach(element => {
 
         });
 
-
+        
         let updatingInquiries = false;
         let updatingJobs = false;
 
+    
         if (element === monthlyJobsCurrentMetrics) {
             console.log("test")
             monthlyJobs.value = monthlyJobsCurrentMetrics.value;
         }
 
-        if (element === leadCost) {
+        if (element === leadCost || element === bookedAppointmentCost || element === bookedAppointmentRate || element === showUpCost || element === showUpRate) {
+            
+            
             if(monthlyJobsCurrentMetrics.value > 0 || monthlyInquiriesCurrentMetrics > 0) {
+
+                document.querySelector(".weekly-profit-before-roofing-accelerator-amount").textContent = '$'+(monthlyJobsCurrentMetrics.value * avgTicketPrice.value*(avgProfitMargin.value/100));
                 monthlyJobsCurrentMetrics.value = 0;
                 monthlyInquiriesCurrentMetrics.value = 0;
                 dailyJobs.value = 0;
@@ -162,7 +202,11 @@ elements.forEach(element => {
                 monthlyProfit.value = 0;
                 yearlyProfit.value = 0;
             }
+
+
         }
+
+        
 
         // Update weeklyJobsCurrentMetrics based on weeklyInquiries
         if (element === monthlyInquiriesCurrentMetrics && !updatingJobs) {
@@ -181,7 +225,7 @@ elements.forEach(element => {
 
             // Additional calculations for daily, weekly, and yearly jobs
             let calculations = [{
-                    value: (monthlyJobsCurrentMetrics.value / 4) / 7,
+                    value: (monthlyJobsCurrentMetrics.value / 28),
                     target: dailyJobs
                 },
                 {
@@ -201,6 +245,17 @@ elements.forEach(element => {
                 } else {
                     calc.target.value = calc.value % 1 ? calc.value.toFixed(2) : calc.value;
                 }
+            }
+
+            if (monthlyJobsCurrentMetrics.value > 0) {
+                let dailyProfitValue = (monthlyJobsCurrentMetrics.value / 28) * (avgTicketPrice.value*(avgProfitMargin.value/100));
+                dailyProfit.value = dailyProfitValue % 1 ? dailyProfitValue.toFixed(2) : dailyProfitValue;
+                let weeklyProfitValue = (monthlyJobsCurrentMetrics.value / 4) * (avgTicketPrice.value*(avgProfitMargin.value/100));
+                weeklyProfit.value = weeklyProfitValue % 1 ? weeklyProfitValue.toFixed(2) : weeklyProfitValue;
+                let monthlyProfitValue = (monthlyJobsCurrentMetrics.value) * (avgTicketPrice.value*(avgProfitMargin.value/100));
+                monthlyProfit.value = monthlyProfitValue % 1 ? monthlyProfitValue.toFixed(2) : monthlyProfitValue;
+                let yearlyProfitValue = (monthlyJobsCurrentMetrics.value * 12) * (avgTicketPrice.value*(avgProfitMargin.value/100));
+                yearlyProfit.value = yearlyProfitValue % 1 ? yearlyProfitValue.toFixed(2) : yearlyProfitValue;
             }
 
             updatingInquiries = false;
@@ -464,7 +519,119 @@ elements.forEach(element => {
                 yearlyProfit.value = yearlyProfitNewValue % 1 ? yearlyProfitNewValue.toFixed(2) : yearlyProfitNewValue;
             }
 
+            monthlyAdBudgetBasedOnWeeklyProfit = calculateMB("weeklyProfit", weeklyProfit.value, showUpCost.value, (closeRate.value/100), avgTicketPrice.value, (avgProfitMargin.value/100), serviceCharge.value);
+            monthlyAdBudget.value = monthlyAdBudgetBasedOnWeeklyProfit % 1 ? monthlyAdBudgetBasedOnWeeklyProfit.toFixed(2) : monthlyAdBudgetBasedOnWeeklyProfit;
+            updateJobsAgencyMetrics();
 
+        }
+
+        if (element === monthlyProfit) {
+            // Calculate dailyProfitNewValue
+            
+
+            // Calculate monthlyProfitNewValue
+            let weeklyProfitValue = monthlyProfit.value / 4;
+            if (isNaN(weeklyProfitValue) || weeklyProfitValue === Infinity) {
+                console.log(`NaN or Infinite`)
+                weeklyProfit.value = 0;
+            } else {
+                weeklyProfit.value = weeklyProfitValue % 1 ? weeklyProfitValue.toFixed(2) : weeklyProfitValue;
+            }
+
+            // Calculate yearlyProfitNewValue
+            let yearlyProfitNewValue = monthlyProfit.value * 12;
+            if (isNaN(yearlyProfitNewValue) || yearlyProfitNewValue === Infinity) {
+                console.log(`NaN or Infinite`)
+                yearlyProfit.value = 0;
+            } else {
+                yearlyProfit.value = yearlyProfitNewValue % 1 ? yearlyProfitNewValue.toFixed(2) : yearlyProfitNewValue;
+            }
+
+            let dailyProfitNewValue = weeklyProfit.value / 7;
+            if (isNaN(dailyProfitNewValue) || dailyProfitNewValue === Infinity) {
+                console.log(`NaN or Infinite`)
+                dailyProfit.value = 0;
+            } else {
+                dailyProfit.value = dailyProfitNewValue % 1 ? dailyProfitNewValue.toFixed(2) : dailyProfitNewValue;
+            }
+
+            monthlyAdBudgetBasedOnWeeklyProfit = calculateMB("monthlyProfit", monthlyProfit.value, showUpCost.value, (closeRate.value/100), avgTicketPrice.value, (avgProfitMargin.value/100), serviceCharge.value);
+            monthlyAdBudget.value = monthlyAdBudgetBasedOnWeeklyProfit % 1 ? monthlyAdBudgetBasedOnWeeklyProfit.toFixed(2) : monthlyAdBudgetBasedOnWeeklyProfit;
+            updateJobsAgencyMetrics();
+
+        }
+
+        if (element === yearlyProfit) {
+            // Calculate dailyProfitNewValue
+            
+
+            // Calculate monthlyProfitNewValue
+            let monthlyProfitValue = yearlyProfit.value / 12;
+            if (isNaN(monthlyProfitValue) || monthlyProfitValue === Infinity) {
+                console.log(`NaN or Infinite`)
+                monthlyProfit.value = 0;
+            } else {
+                console.log("wha1at")
+                monthlyProfit.value = monthlyProfitValue % 1 ? monthlyProfitValue.toFixed(2) : monthlyProfitValue;
+            }
+
+            // Calculate yearlyProfitNewValue
+            let weeklyProfitNewValue = monthlyProfit.value / 4;
+            if (isNaN(weeklyProfitNewValue) || weeklyProfitNewValue === Infinity) {
+                console.log(`NaN or Infinite`)
+                weeklyProfit.value = 0;
+            } else {
+                weeklyProfit.value = weeklyProfitNewValue % 1 ? weeklyProfitNewValue.toFixed(2) : weeklyProfitNewValue;
+            }
+
+            let dailyProfitNewValue = weeklyProfit.value / 7;
+            if (isNaN(dailyProfitNewValue) || dailyProfitNewValue === Infinity) {
+                console.log(`NaN or Infinite`)
+                dailyProfit.value = 0;
+            } else {
+                dailyProfit.value = dailyProfitNewValue % 1 ? dailyProfitNewValue.toFixed(2) : dailyProfitNewValue;
+            }
+
+            monthlyAdBudgetBasedOnWeeklyProfit = calculateMB("yearlyProfit", yearlyProfit.value, showUpCost.value, (closeRate.value/100), avgTicketPrice.value, (avgProfitMargin.value/100), serviceCharge.value);
+            monthlyAdBudget.value = monthlyAdBudgetBasedOnWeeklyProfit % 1 ? monthlyAdBudgetBasedOnWeeklyProfit.toFixed(2) : monthlyAdBudgetBasedOnWeeklyProfit;
+            updateJobsAgencyMetrics();
+        }
+
+        if (element === dailyProfit) {
+            // Calculate dailyProfitNewValue
+            
+
+            // Calculate monthlyProfitNewValue
+            let monthlyProfitValue = dailyProfit.value * 28;
+            if (isNaN(monthlyProfitValue) || monthlyProfitValue === Infinity) {
+                console.log(`NaN or Infinite`)
+                monthlyProfit.value = 0;
+            } else {
+                console.log("wha1at")
+                monthlyProfit.value = monthlyProfitValue % 1 ? monthlyProfitValue.toFixed(2) : monthlyProfitValue;
+            }
+
+            // Calculate yearlyProfitNewValue
+            let weeklyProfitNewValue = monthlyProfit.value / 4;
+            if (isNaN(weeklyProfitNewValue) || weeklyProfitNewValue === Infinity) {
+                console.log(`NaN or Infinite`)
+                weeklyProfit.value = 0;
+            } else {
+                weeklyProfit.value = weeklyProfitNewValue % 1 ? weeklyProfitNewValue.toFixed(2) : weeklyProfitNewValue;
+            }
+
+            let yearlyProfitNewValue = monthlyProfit.value * 12;
+            if (isNaN(yearlyProfitNewValue) || yearlyProfitNewValue === Infinity) {
+                console.log(`NaN or Infinite`)
+                dailyProfit.value = 0;
+            } else {
+                yearlyProfit.value = yearlyProfitNewValue % 1 ? yearlyProfitNewValue.toFixed(2) : yearlyProfitNewValue;
+            }
+
+
+            monthlyAdBudgetBasedOnWeeklyProfit = calculateMB("dailyProfit", dailyProfit.value, showUpCost.value, (closeRate.value/100), avgTicketPrice.value, (avgProfitMargin.value/100), serviceCharge.value);
+            monthlyAdBudget.value = monthlyAdBudgetBasedOnWeeklyProfit % 1 ? monthlyAdBudgetBasedOnWeeklyProfit.toFixed(2) : monthlyAdBudgetBasedOnWeeklyProfit;
+            updateJobsAgencyMetrics();
 
         }
 
@@ -497,6 +664,40 @@ elements.forEach(element => {
             updateJobsAgencyMetrics();
             updateProfitAgencyMetrics();
 
+        }
+
+        function calculateMB(profitType, profitAmount, SC, CR, ATP, PM, SrvC) {
+            let monthlyProfit;
+            console.log([profitType, profitAmount, SC, CR, ATP, PM, SrvC])
+            switch (profitType) {
+              case 'dailyProfit':
+                monthlyProfit = Number(profitAmount) * 28;
+                break;
+              case 'weeklyProfit':
+                monthlyProfit = Number(profitAmount) * 4;
+                break;
+              case 'monthlyProfit':
+                monthlyProfit = Number(profitAmount);
+                break;
+              case 'yearlyProfit':
+                monthlyProfit = Number(profitAmount) / 12;
+                break;
+              default:
+                return 'Invalid profit type';
+            }   
+          
+            const weeklyProfit = monthlyProfit / 4;
+            const numerator = 4 * weeklyProfit * SC;
+            const denominator = CR * ATP * PM - SC - SrvC;
+            
+            if (denominator === 0) {
+              // Handle division by zero, if needed
+              return 'Denominator cannot be zero';
+            }
+
+            const MAB = numerator / denominator;
+  
+            return MAB;
         }
 
         function updateShowUpRate() {
@@ -659,6 +860,8 @@ elements.forEach(element => {
                 yearlyProfit.value = 0;
                 console.log(`NaN or Infinite`)
             } else yearlyProfit.value = yearlyProfitValue % 1 ? yearlyProfitValue.toFixed(2) : yearlyProfitValue;
+
+            document.querySelector(".weekly-profit-after-roofing-accelerator-amount").textContent = '$'+monthlyProfit.value
         }
     })
 });
